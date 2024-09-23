@@ -1,0 +1,9 @@
+.content{
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    
+}
