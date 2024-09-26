@@ -18,7 +18,7 @@ export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
-    const user=JSON.parse(localStorage.getItem("user"))
+  const user = JSON.parse(localStorage.getItem("userEmail"));
 
   const link = [
     {
@@ -29,14 +29,13 @@ export function Header() {
     {
       id: 2,
       title: "Favorite",
-      link: "/products",
+      link: "/favorite",
     },
     {
       id: 3,
       title: "About",
       link: "/about",
     },
-    
   ];
   // const [active, setActive] = useState();
 
@@ -49,12 +48,16 @@ export function Header() {
   return (
     <Box pt={15} className={classes.parent}>
       <header className={classes.header}>
-        <Group justify="space-between" style={{alignItems:"center"}} h="100%">
+        <Group
+          justify="space-between"
+          style={{ alignItems: "center" }}
+          h="100%"
+        >
           <Group h="100%" gap={40} visibleFrom="md">
             {item}{" "}
           </Group>
           {/* <MantineLogo size={30} /> */}
-          <Box className={user ? classes.logoInUser: classes.logo }>
+          <Box className={user ? classes.logoInUser : classes.logo}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <Text fz={30} className={classes.logoSport}>
                 Sports
@@ -74,27 +77,37 @@ export function Header() {
                 placeholder="Search.."
               />
             </Box> */}
-            {
-              !user?
-              (
-
-                <>
+            {!user ? (
+              <>
                 <Link className={classes.login} to={"/login"} variant="default">
                   Log in
                 </Link>
                 <Link className={classes.signup} to={"/sign-up"}>
                   Sign up
                 </Link>
-                </>
-
-              ):(
-                <>
-                  <Text fw={700} fz={20} style={{borderRadius:"50px" , backgroundColor:"black" , color:"white"}} py={5} px={10}>
-                    {user.fullName[0]}
-                  </Text>
-                </>
-              ) 
-            }
+              </>
+            ) : (
+              <>
+                <Text
+                  ta={"center"}
+                  fw={700}
+                  fz={20}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "100px",
+                    backgroundColor: "black",
+                    color: "white",
+                  }}
+                  py={3}
+                  
+                  px={9}
+                >
+                  {user[0]}
+                </Text>
+              </>
+            )}
           </Group>
 
           <Burger

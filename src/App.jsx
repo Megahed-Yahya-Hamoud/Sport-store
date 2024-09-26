@@ -1,7 +1,7 @@
 import "./App.css";
 import {Routes ,Route} from 'react-router-dom'
 import Home from "./pages/home/Home";
-import Products from "./pages/products/Products";
+// import Favorite from "./pages/favorite/Favorite";
 import About from "./pages/about/About";
 import { Header } from "./layout/header/Header";
 import { Footer } from "./layout/footer/Footer";
@@ -11,6 +11,7 @@ import { Box } from "@mantine/core";
 import { ErrorPage } from "./pages/errorPage/ErrorPage";
 import ConfirmCode from "./pages/confirmCodePage/ConfirmCode";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
+import Favorite from "./pages/favorite/Favorite";
 function App() {
   return (
     <>
@@ -19,7 +20,7 @@ function App() {
         <Routes>
           <Route path="*" Component={ErrorPage} />
           <Route path="/" Component={Home} />
-          <Route path="/products" Component={Products} />
+          <Route path="/favorite" Component={Favorite} />
           <Route path="/products/:id" Component={SingleProduct} />
           <Route path="/about" Component={About} />
           <Route path="/sign-up" Component={Signup} />

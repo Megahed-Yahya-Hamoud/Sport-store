@@ -14,6 +14,7 @@ export default function Filter() {
           />
           <input
             type="text"
+            name="product"
             placeholder="Product"
             className={classes.inputFilter}
           />
@@ -27,6 +28,7 @@ export default function Filter() {
           </select>
           <input
             type="number"
+            name="price"
             placeholder="Price"
             className={classes.inputFilter}
           />

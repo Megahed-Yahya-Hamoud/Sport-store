@@ -2,6 +2,7 @@ import { Box, Button, Text } from "@mantine/core";
 import classes from "./ConfirmCode.module.css";
 import { useState } from "react";
 import { notifications } from "@mantine/notifications";
+import axios from "axios";
 
 export default function ConfirmCode() {
   const [otp, setOpt] = useState(new Array(6).fill(""));
@@ -34,38 +35,72 @@ export default function ConfirmCode() {
     }
   }
 
-  
   function check() {
+    const email = JSON.parse(localStorage.getItem("userEmail"));
 
-    const num = ["1", "1", "1", "1", "1", "1"];
-    
-    if (
-      otp[0] == num[0] &&
-      otp[1] == num[1] &&
-      otp[2] == num[2] &&
-      otp[3] == num[3] &&
-      otp[4] == num[4] &&
-      otp[5] == num[5]
-    ) {
-      notifications.show({
-        message: "Account creation was successful ",
-        color: "green",
-      });
-      
-      setTimeout(() => {
-        location.href = "/";
-      }, 1000);    
-    } else {
+    axios({
+      url: "https://e-commerce-proejct.vercel.app/api/v1/auth/verifyemail",
+      method: "post",
+      data: {
+        email: email,
+        code: Number(otp.join("")),
+      },
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((result) => {
+        console.log(result);
+
+        if (result.status == 200) {
+          notifications.show({
+            message: result.data.message,
+            color: "green",
+          });
+          setTimeout(() => {
+            location.href = "/login";
+          }, 1000);
+        }
+
+      })
+      .catch((error) => {
+        
         notifications.show({
-        message: "Make sure the code is written correctly",
-        color: "red",
-      });   
-     }
+          message: error.data.message,
+          color: "red",
+        });
+        console.log(error);
+      });
 
-    console.log(num);
-    console.log(otp);
+
+
+    // const num = ["1", "1", "1", "1", "1", "1"];
+
+    // if (
+    //   otp[0] == num[0] &&
+    //   otp[1] == num[1] &&
+    //   otp[2] == num[2] &&
+    //   otp[3] == num[3] &&
+    //   otp[4] == num[4] &&
+    //   otp[5] == num[5]
+    // ) {
+    //   notifications.show({
+    //     message: "Account creation was successful ",
+    //     color: "green",
+    //   });
+
+    //   setTimeout(() => {
+    //     location.href = "/login";
+    //   }, 1000);
+    // } else {
+    //   notifications.show({
+    //     message: "Make sure the code is written correctly",
+    //     color: "red",
+    //   });
+    // }
+
+    // console.log(num);
+    console.log(...otp);
   }
-  
+
   return (
     <Box px={5}>
       <Box mt={70} display={"grid"} style={{ justifyItems: "center" }}>

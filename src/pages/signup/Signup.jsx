@@ -5,8 +5,10 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import SignupSchema from "./schema/SignupSchema";
 import { notifications } from "@mantine/notifications";
 import Google from "../signupAndLoginWithGoogle/google";
+import axios from "axios";
 
 export default function Signup() {
+
   function handelSubmit(values) {
     const data = { ...values };
     if (
@@ -19,26 +21,36 @@ export default function Signup() {
         color: "red",
       });
     } else {
-      delete data.confirmPassword;
-      
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+
+      axios({
+        url: "https://e-commerce-proejct.vercel.app/api/v1/auth/signup",
+        method: "post",
+        data: {
+          userName:values.fullName,
+          email: values.email,
+          password: values.password,
+          phone:"0123456789"
         },
-        body: JSON.stringify(data),
-      });
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((result) => {
+          console.log(result);
+          localStorage.setItem("userEmail",JSON.stringify(values.email))
+          if (result.status == 201) {
+            setTimeout(() => {
+              location.href = "/confirm-code";
+            }, 1000);
+          }
+        })
+        .catch((error) => {
+          notifications.show({
+            message: error.data.message,
+            color: "red",
+          });
+          console.log(error);
+        });
 
-      localStorage.setItem("user",JSON.stringify(data))
-
-      // notifications.show({
-      //   message: "Success register",
-      //   color: "green",
-      // });
-      setTimeout(() => {
-        location.href = "/confirm-code";
-      }, 1000);
-    }
+      }
   }
 
   return (

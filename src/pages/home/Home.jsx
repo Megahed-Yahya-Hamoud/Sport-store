@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
-import { Box, Button, Image, Menu, Text } from "@mantine/core";
+import { Box, Button, Image, Menu, Pagination, Text } from "@mantine/core";
 import {
   IconDotsVertical,
   IconHeart,
@@ -53,7 +53,7 @@ export default function Home() {
         <Box>
           <Filter />
         </Box>
-        <Box mb={150} className={classes.containerCards}>
+        <Box mb={130} className={classes.containerCards}>
           {products.map((item) => (
             <>
               {item.id < 52 ? (
@@ -94,16 +94,21 @@ export default function Home() {
                         >
                           <Menu.Item
                             w={"fit-content"}
+                            bg={"#f0f8ff00"}
                             m={5}
+                            onClick={()=>location.href="/"}
                             leftSection={
                               <IconShoppingCart
+                              
                                 className={classes.iconDotsOne}
                               />
                             }
                           ></Menu.Item>
                           <Menu.Item
                             w={"fit-content"}
+                            bg={"#f0f8ff00"}
                             m={5}
+                            onClick={()=>location.href="/"}
                             leftSection={
                               <IconHeart className={classes.iconDotsTwo} />
                             }
@@ -128,7 +133,9 @@ export default function Home() {
             </>
           ))}
         </Box>
-        <Box display={"flex"} style={{ justifyContent: "center" }}></Box>
+        <Box mb={50} display={"flex"} style={{ justifyContent: "center" }}>
+        <Pagination total={5} color="black" size="lg" />
+        </Box>
       </Box>
     </Box>
   );
