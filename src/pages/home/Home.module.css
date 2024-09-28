@@ -1,18 +1,3 @@
-.title {
-  font-family: fantasy;
-  font-size: 50px !important;
-  line-height: normal !important;
-  @media (max-width: 500px) {
-    font-size: 35px !important;
-    padding-left: 3px !important;
-    padding-right: 3px !important;
-  }
-
-  @media (max-width: 370px) {
-    font-size: 30px !important;
-  }
-}
-
 .card {
   transition: 0.2s ease-in-out;
   overflow: hidden;
@@ -48,8 +33,6 @@
   width: 250px;
   height: 250px;
 }
-
-
 
 .imageCard {
   width: 100%;
@@ -103,13 +86,11 @@
     cursor: pointer;
   }
 
-  
-@media (max-width: 768px) {
-  .icons{
-    display: none;
+  @media (max-width: 768px) {
+    .icons {
+      display: none;
+    }
   }
-}
-
 }
 
 .details {
@@ -130,12 +111,10 @@
     display: none;
     font-size: 15px;
     font-weight: 400;
-
   }
   .price {
     height: fit-content;
   }
-
 }
 
 .card:hover {
@@ -153,21 +132,20 @@
   }
 }
 
-
-.toggle{
+.toggle {
   display: none;
   position: absolute;
   top: 5%;
   left: 5%;
-  .dots{
+  .dots {
     border-radius: 50px;
     padding: 5px 5px;
     color: black;
     background-color: white;
     display: flex;
-    justify-content: center; 
-    
-    &:hover{
+    justify-content: center;
+
+    &:hover {
       background-color: rgb(222, 220, 220);
       color: black;
     }
@@ -175,13 +153,14 @@
 }
 
 @media (max-width: 768px) {
-  .toggle{
+  .toggle {
     display: initial;
-    opacity: 1; 
+    opacity: 1;
   }
 }
 
-.iconDotsOne ,.iconDotsTwo{
+.iconDotsOne,
+.iconDotsTwo {
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -189,10 +168,33 @@
   background-color: white;
 }
 
-.iconDotsOne{
+.iconDotsOne {
   color: var(--main-color);
 }
 
-.iconDotsTwo{
+.iconDotsTwo {
   color: red;
+}
+
+.companies{
+  @media (max-width:650px) {
+    display: none;
+  }
+}
+
+.firstTitle{
+  display: flex;
+  justify-content: center;
+  @media (max-width:650px) {
+    display: none;
+  }
+}
+
+.secondTitle{
+  display: none;
+
+  @media (max-width:650px) {
+    display: flex;
+    justify-content: center;
+  }
 }

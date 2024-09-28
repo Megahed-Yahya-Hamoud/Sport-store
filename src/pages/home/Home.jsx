@@ -8,6 +8,8 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import Filter from "./component/Filter";
+import HeaderHome from "./component/header/HeaderHome";
+import Companies from "./component/seaction-Companies/Companies";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -21,37 +23,25 @@ export default function Home() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  // console.log(products);
-
-  // useEffect(() => {
-  //   axios({
-  //     url: `https://fakestoreapi.com/products`,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     method: "get",
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  // console.log(number);
-
-  // function addCode(value) {
-  //   setNumber(value);
-  //   console.log(number);
-  // }
-
   return (
     <Box>
       <Box className={classes.content}>
-        <Text mt={40} ta={"center"} className={classes.title}>
-          Everything new in the world <br /> of sports
-        </Text>
+        <HeaderHome />
+        <Box mt={10} className={classes.companies}>
+          <Companies/>
+        </Box>
+        <Box mt={30}className={classes.firstTitle}>
+          <Text fz={40} fw={700}>
+            Latest products
+          </Text>
+        </Box>
         <Box>
           <Filter />
+        </Box>
+        <Box my={10} className={classes.secondTitle}>
+          <Text fz={30} fw={700}>
+            Latest products:
+          </Text>
         </Box>
         <Box mb={130} className={classes.containerCards}>
           {products.map((item) => (
@@ -62,8 +52,8 @@ export default function Home() {
                     <Image className={classes.imageCard} src={item.images} />
                     <Box className={classes.icons}>
                       <Box className={classes.icons}>
-                        <IconShoppingCart  className={classes.icon} />
-                        <IconHeart  className={classes.iconTwo} />
+                        <IconShoppingCart className={classes.icon} />
+                        <IconHeart className={classes.iconTwo} />
                       </Box>
                     </Box>
                     <Box className={classes.toggle}>
@@ -81,25 +71,21 @@ export default function Home() {
                           </Button>
                         </Menu.Target>
                         <Menu.Dropdown
-                          styles={{
-                            dropdown: {
-                              border: "0px",
-                              boxShadow: "none",
-                              backgroundColor: "#ffffff00",
-                              marginLeft: "5px",
-                            },
+                          style={{
+                            border: "0px",
+                            boxShadow: "none",
                           }}
                           w={"fit-content"}
-                          // className={classes.style}
+                          bg={"#ffffff00"}
+                          ml={5}
                         >
                           <Menu.Item
                             w={"fit-content"}
                             bg={"#f0f8ff00"}
                             m={5}
-                            onClick={()=>location.href="/"}
+                            onClick={() => (location.href = "/")}
                             leftSection={
                               <IconShoppingCart
-                              
                                 className={classes.iconDotsOne}
                               />
                             }
@@ -108,7 +94,7 @@ export default function Home() {
                             w={"fit-content"}
                             bg={"#f0f8ff00"}
                             m={5}
-                            onClick={()=>location.href="/"}
+                            onClick={() => (location.href = "/")}
                             leftSection={
                               <IconHeart className={classes.iconDotsTwo} />
                             }
@@ -118,7 +104,7 @@ export default function Home() {
                     </Box>
                   </Box>
                   <Box className={classes.details}>
-                    <Link to={`/products/${item.id}`}  className={classes.text}>
+                    <Link to={`/products/${item.id}`} className={classes.text}>
                       {item.title}
                     </Link>
 
@@ -134,7 +120,7 @@ export default function Home() {
           ))}
         </Box>
         <Box mb={50} display={"flex"} style={{ justifyContent: "center" }}>
-        <Pagination total={5} color="black" size="lg" />
+          <Pagination total={5} color="black" size="lg" />
         </Box>
       </Box>
     </Box>

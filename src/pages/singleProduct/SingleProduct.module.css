@@ -124,31 +124,29 @@
 }
 
 .containerDescription {
-  margin: 70px 110px 20px;
-  display: flex;
+  margin: 30px 110px 20px;
+  /* display: flex; */
   gap: 1rem;
+  width: 100%;
 
-  .description{
+  .description {
     font-weight: 500;
     font-size: 18px;
   }
 
   .descriptionBox {
     width: 100%;
+    margin-top: 8px;
     font-size: 20px;
     font-weight: 500;
   }
 
-  .videoBox {
-    width: 100%;
-  }
-
   @media (max-width: 1250px) {
-    margin: 70px 50px 20px;
+    margin: 30px 50px 20px;
   }
 
   @media (max-width: 1151px) {
-    margin: 70px 0px 20px;
+    margin: 30px 0px 20px;
   }
 
   @media (max-width: 1073px) {
@@ -156,37 +154,16 @@
     justify-content: center;
     .descriptionBox {
       width: auto;
-      order: 2;
       font-size: 18px;
       font-weight: 400;
-    }
-    .videoBox {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      order: 1;
     }
   }
 
   @media (max-width: 688px) {
-    .videoBox {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      order: 1;
-    }
-
-    .descriptionBox {
-      text-align: center;
-    }
-
     .description {
       width: 100%;
       font-size: 16px;
       font-weight: 400;
     }
   }
-
-
-
 }

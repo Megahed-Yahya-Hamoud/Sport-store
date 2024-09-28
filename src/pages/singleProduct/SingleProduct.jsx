@@ -64,71 +64,86 @@ export default function SingleProduct() {
         setActiveColor(ele.color);
       }}
     >
-      <Box style={{borderRadius:"3px"}} h={"30px"} bg={ele.color} w={"30px"}></Box>
+      <Box
+        style={{ borderRadius: "3px" }}
+        h={"30px"}
+        bg={ele.color}
+        w={"30px"}
+      ></Box>
     </Box>
   ));
 
   return (
     <Box>
       <Box m={20} className={classes.parent}>
-        <Carousel  withIndicators loop w={500}>
+        <Carousel withIndicators loop w={500}>
           {product.images &&
             product.images.map((ele) => (
-              <Carousel.Slide  key={ele}>
-                <Image style={{borderRadius:"8px"}} src={ele} width={"100%"} h={"100%"} />
+              <Carousel.Slide key={ele}>
+                <Image
+                  style={{ borderRadius: "8px" }}
+                  src={ele}
+                  width={"100%"}
+                  h={"100%"}
+                />
               </Carousel.Slide>
             ))}
         </Carousel>
         <Box className={classes.details} px={10}>
-          <Box className={classes.containerTitle}>
-            <Box>
-              <Text mt={0} mb={0} className={classes.title} fw={"700"} fz={25}>
-                {product.title}
-                <Text display={"inline-block"} fz={15} fw={600}>
-                  .(Puma)
-                </Text>
-              </Text>
-              <Text
-                className={classes.price}
-                c={"red"}
-                fw={"700"}
-                my={20}
-                fz={25}
-              >
-                {product.price}.00${" "}
-                <del
-                  style={{
-                    color: "#8b8b8bb3",
-                    fontSize: "15px",
-                    fontWeight: 500,
-                  }}
-                >
-                  100$
-                </del>
-              </Text>
+          <Text mt={0} mb={0} className={classes.title} fw={"700"} fz={25}>
+            {product.title}
+          </Text>
+          <Text className={classes.title} pl={1} fw={600} c={"#007185"}>
+            Brand: Puma
+          </Text>
+          <Text className={classes.price} c={""} fw={"700"} my={0} fz={25}>
+            {product.price}.00
+            <span
+              style={{
+                // color: "",
+                fontSize: "20px",
+                fontWeight: 500,
+                // paddingBottom:"10px"
+              }}
+            >
+              ${" "}
+            </span>
+            <span
+              style={{
+                color: "red",
+                fontSize: "20px",
+                fontWeight: 400,
+              }}
+            >
+              -16%
+            </span>
+          </Text>
 
-              <Box className={classes.stars}>
-                <IoMdStar className={classes.iconStar} />
-                <IoMdStar className={classes.iconStar} />
-                <IoMdStar className={classes.iconStar} />
-                <IoMdStar className={classes.iconStar} />
-                <IoMdStar className={classes.iconStar} />
-                <Text>
-                  {"{ "}0.0{" }"}
-                </Text>
-              </Box>
-            </Box>
-            <Box>
-              <Image
-                src={
-                  "https://www.logodesignvalley.com/blog/wp-content/uploads/2023/05/puma-2.png"
-                }
-                w={"100%"}
-                h={"200px"}
-              />
-            </Box>
+          <Text className={classes.title} mb={5} pl={2} fw={600} c={"#777A7A"}>
+            List price:{" "}
+            <del
+              style={{
+                fontSize: "15px",
+                fontWeight: 500,
+              }}
+            >
+              100$
+            </del>
+          </Text>
+
+          <Box className={classes.stars}>
+            <IoMdStar className={classes.iconStar} />
+            <IoMdStar className={classes.iconStar} />
+            <IoMdStar className={classes.iconStar} />
+            <IoMdStar className={classes.iconStar} />
+            <IoMdStar className={classes.iconStar} />
+            <Text>
+              {"{ "}0.0{" }"}
+            </Text>
           </Box>
-          <Divider mb={10} />
+
+          {/* </Box> */}
+          <Divider my={10} />
           <Box mb={20} className={classes.containerDetails}>
             <Box>
               <Text
@@ -188,6 +203,7 @@ export default function SingleProduct() {
                 mb={10}
                 fw={700}
                 c={"rgb(22,65,150)"}
+                ta={"center"}
               >
                 Pieces:
               </Text>
@@ -222,7 +238,7 @@ export default function SingleProduct() {
         </Box>
 
         <Box className={classes.containerDescription}>
-          <Box className={classes.descriptionBox}>
+          <Box mb={40} ta={"center"} className={classes.descriptionBox}>
             <Text
               className={classes.title}
               fz={20}
@@ -233,16 +249,15 @@ export default function SingleProduct() {
             </Text>{" "}
             <Text className={classes.description}>{product.description}</Text>
           </Box>
-          <Box className={classes.videoBox}>
-            <ReactPlayer
-              url="https://youtu.be/gbLmku5QACM?si=6tDuGSODypqFd4JM"
-              height={"350px"}
-              width={"100%"}
-              controls
-              playIcon
-              className={classes.video}
-            />
-          </Box>
+
+          <ReactPlayer
+            url="https://youtu.be/gbLmku5QACM?si=6tDuGSODypqFd4JM"
+            height={"400px"}
+            width={"100%"}
+            controls
+            playIcon
+            className={classes.video}
+          />
         </Box>
       </Box>
     </Box>
