@@ -9,9 +9,15 @@ export const HTTP_METHODS = {
   DELETE: "DELETE",
 };
 
+export const contentType = {
+  appJson:"application/json",
+  formData:"multipart/form-data"
+}
+
 export async function httpRequest(
   endpoint,
   method = HTTP_METHODS.GET,
+  contentType,
   data = {},
   headers = {},
   queryParameters = {},
@@ -25,7 +31,7 @@ export async function httpRequest(
       data,
       headers: {
         ...headers,
-        "Content-Type": "application/json",
+        "Content-Type": contentType,
       }
     });
     printResponse(response);

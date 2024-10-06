@@ -1,7 +1,7 @@
 
 const API_CONFIG = {
-    //baseUrl: "https://api.codesplus.online/api/v1/",
-    baseUrl: "http://localhost:4500/api/v1/",
+    baseUrl: "https://e-commerce-proejct.vercel.app/api/v1/",
+    //baseUrl: "http://localhost:4500/api/v1/",
     secretKey:"",
     endpoints: {
         auth: {
@@ -15,6 +15,27 @@ const API_CONFIG = {
             googleAuth: "auth/googleauth",
             logout: "auth/logout",
         },
+        products:{
+            createProduct:"product/createproduct",// type = formData
+            updateProduct:"product/updateproduct", // + the id  type = formData
+            allProducts:"product/allproducts",
+            productById:"product/product-by-id",// + the id
+            categoryProduct:"product/category-product", // + category id
+            latestProducts:"product/latestproducts"
+        },
+        brands:{
+            createBrand:"brand/createbrand",// type = formData
+            updateBrand:"brand/updatebrand",// + the id      type  = formData
+            trustedBrands:"brand/trustedbrands"
+        },
+        categories:{
+            createCategory:"category/createcategory",
+            updateCategory:"category/updatecategory",//+ the id
+            allCategories:"category/allcategories"
+        },
+        user:{
+
+        }
     },
 };
 
