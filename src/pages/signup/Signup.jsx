@@ -14,6 +14,7 @@ export default function Signup() {
     if (
       data.fullName == "" ||
       data.email == "" ||
+      data.phone == "" ||
       data.password != data.confirmPassword
     ) {
       notifications.show({
@@ -29,7 +30,7 @@ export default function Signup() {
           userName:values.fullName,
           email: values.email,
           password: values.password,
-          phone:"0123456789"
+          phone:values.phone
         },
         headers: { "Content-Type": "application/json" },
       })
@@ -61,6 +62,7 @@ export default function Signup() {
           initialValues={{
             fullName: "",
             email: "",
+            phone:"",
             password: "",
             confirmPassword: "",
           }}
@@ -113,6 +115,23 @@ export default function Signup() {
               />
             </Box>
             <Box>
+              <label htmlFor="phone" className={classes.label}>
+              Phone 
+              </label>
+              <Field
+                className={classes.inputFiled}
+                id="phone"
+                name="phone"
+                type="number"
+                placeholder="Phone number"
+              />
+              <ErrorMessage
+                name="phone"
+                component="div"
+                style={{ color: "red" , fontSize:"15px" , fontWeight:500 }}
+              />
+            </Box>
+            <Box>
               <label htmlFor="password" className={classes.label}>
                 Password
               </label>
@@ -147,7 +166,8 @@ export default function Signup() {
               />
             </Box>
 
-            <Button mt={5} type="submit" color="black">
+
+            <Button   mt={5} type="submit" color="black">
               Submit
             </Button>
             <Box mt={-5} ta={"center"}>

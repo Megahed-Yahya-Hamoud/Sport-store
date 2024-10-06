@@ -2,8 +2,19 @@ import { Box, Button } from "@mantine/core";
 import classes from "./Filter.module.css";
 
 export default function Filter() {
+  // const [cate, setCate] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("https://api.escuelajs.co/api/v1/products")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+        // setCate(data.title);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
+
   return (
-    <Box mt={40} mb={30}>
+    <Box>
       <form className={classes.filterForm}>
         <Box className={classes.containerInput}>
           <input

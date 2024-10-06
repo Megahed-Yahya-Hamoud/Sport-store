@@ -41,6 +41,21 @@
   color: #888;
 } */
 
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  /* padding: 10px; */
+  background-color: rgba(0, 0, 0, 0.059);
+}
+
 .style{
   min-height: 450px;
 }
