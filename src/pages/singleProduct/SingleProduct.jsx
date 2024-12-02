@@ -6,68 +6,86 @@ import { Carousel } from "@mantine/carousel";
 import { IoMdStar } from "react-icons/io";
 import { useCounter } from "@mantine/hooks";
 import ReactPlayer from "react-player";
+import {
+  contentType,
+  HTTP_METHODS,
+  httpRequest,
+} from "../../core/utils/httpRequest";
+import API_CONFIG from "../../core/utils/apiConfig";
 
 export default function SingleProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [colors, setColors] = useState([]);
+  const [size, setSize] = useState([]);
 
-  useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products/" + id)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data), console.log(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  httpRequest(
+    API_CONFIG.endpoints.products.productById + "/" + id,
+    HTTP_METHODS.GET,
+    contentType.appJson
+  )
+    .then((res) => {
+      console.log(res.data.data[0]);
+      setProduct(res.data.data[0]);
+      setColors(res.data.data[0].colors)      
+      setSize(res.data.data[0].size)      
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   const [count, handlers] = useCounter(1, { min: 1 });
 
-  const size = [
-    { label: "41" },
-    { label: "42" },
-    { label: "43" },
-    { label: "44" },
-    { label: "45" },
-  ];
+  // const size = [
+  //   { label: "41" },
+  //   { label: "42" },
+  //   { label: "43" },
+  //   { label: "44" },
+  //   { label: "45" },
+  // ];
 
-  const [active, setActive] = useState(size[0].label);
+  const [activeSize, setActiveSize] = useState(size[0]);
 
   const items = size.map((ele) => (
     <Box
-      key={ele.label}
+      key={ele}
       className={classes.size}
-      data-active={active === ele.label || undefined}
+      data-active={activeSize === ele || undefined}
       onClick={() => {
-        setActive(ele.label);
+        setActiveSize(ele);
       }}
     >
-      {ele.label}
+      {ele}
     </Box>
   ));
 
-  const colors = [
-    { color: "red" },
-    { color: "green" },
-    { color: "yellow" },
-    { color: "blue" },
-    { color: "grey" },
-  ];
+  // const colors = [
+  //   { color: "red" },
+  //   { color: "green" },
+  //   { color: "yellow" },
+  //   { color: "blue" },
+  //   { color: "grey" },
+  // ];
 
-  const [activeColor, setActiveColor] = useState(colors[0].color);
+  const [activeColor, setActiveColor] = useState(colors[0]);
+
+// console.log(activeColor);
 
   const color = colors.map((ele) => (
     <Box
-      key={ele.color}
+      key={ele}
       className={classes.color}
-      data-active={activeColor === ele.color || undefined}
+      data-active={activeColor == ele || undefined}
       onClick={() => {
-        setActiveColor(ele.color);
+        setActiveColor(ele);
+        // console.log(ele);
       }}
     >
       <Box
         style={{ borderRadius: "3px" }}
         h={"30px"}
-        bg={ele.color}
+        bg={ele}
         w={"30px"}
       ></Box>
     </Box>
@@ -91,13 +109,13 @@ export default function SingleProduct() {
         </Carousel>
         <Box className={classes.details} px={10}>
           <Text mt={0} mb={0} className={classes.title} fw={"700"} fz={25}>
-            {product.title}
+            {product.productName}
           </Text>
           <Text className={classes.title} pl={1} fw={600} c={"#007185"}>
-            Brand: Puma
+            Brand: {product.brandName}
           </Text>
           <Text className={classes.price} c={""} fw={"700"} my={0} fz={25}>
-            {product.price}.00
+            {product.finalPrice}.00
             <span
               style={{
                 // color: "",
@@ -115,7 +133,7 @@ export default function SingleProduct() {
                 fontWeight: 400,
               }}
             >
-              -16%
+              -{product.discount}%
             </span>
           </Text>
 
@@ -127,7 +145,7 @@ export default function SingleProduct() {
                 fontWeight: 500,
               }}
             >
-              100$
+              {product.price}$
             </del>
           </Text>
 
@@ -155,7 +173,7 @@ export default function SingleProduct() {
               >
                 Remaining colors:
               </Text>
-              <Group gap={15} justify="center">
+              <Group gap={15} justify="start">
                 {color}
               </Group>
             </Box>
@@ -176,7 +194,7 @@ export default function SingleProduct() {
                 Remaining pieces:
               </Text>
               <Text ml={5} c={"black"} fz={18} mb={10} fw={700}>
-                45 piece
+                {product.stock} piece
               </Text>
             </Box>
           </Box>
@@ -238,7 +256,7 @@ export default function SingleProduct() {
         </Box>
 
         <Box className={classes.containerDescription}>
-          <Box mb={40} ta={"center"} className={classes.descriptionBox}>
+          {/* <Box mb={40} ta={"center"} className={classes.descriptionBox}>
             <Text
               className={classes.title}
               fz={20}
@@ -250,6 +268,9 @@ export default function SingleProduct() {
             <Text className={classes.description}>{product.description}</Text>
           </Box>
 
+
+          
+
           <ReactPlayer
             url="https://youtu.be/gbLmku5QACM?si=6tDuGSODypqFd4JM"
             height={"400px"}
@@ -257,7 +278,7 @@ export default function SingleProduct() {
             controls
             playIcon
             className={classes.video}
-          />
+          /> */}
         </Box>
       </Box>
     </Box>

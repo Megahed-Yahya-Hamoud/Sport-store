@@ -21,13 +21,13 @@
 
 .size {
   display: block;
-  line-height: 1;
-  padding: 14px 15px;
+  /* line-height: 1; */
+  padding: 10px 15px;
   border-radius: var(--mantine-radius-sm);
   text-decoration: none;
   color: rgb(22, 65, 150);
   border: 1px solid rgba(0, 0, 0, 0.129);
-  font-size: var(--mantine-font-size-sm);
+  font-size: 17px;
   font-weight: 500;
   cursor: pointer;
   transition: 0.1s ease-in-out;
@@ -44,16 +44,14 @@
 
 .color {
   display: block;
-  /* line-height: 1; */
   padding: 5px;
   border-radius: var(--mantine-radius-sm);
   text-decoration: none;
-  /* color: rgb(22, 65, 150); */
   border: 1px solid rgba(0, 0, 0, 0.129);
-  /* font-size: var(--mantine-font-size-sm); */
-  /* font-weight: 500; */
   cursor: pointer;
   transition: 0.1s ease-in-out;
+  /* display: flex; */
+  /* justify-content: start; */
 
   &:hover {
     border: 1px solid rgba(22, 65, 150, 0.481);

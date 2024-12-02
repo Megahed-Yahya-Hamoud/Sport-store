@@ -19,19 +19,35 @@ import HeaderHome from "./component/header/HeaderHome";
 import Companies from "./component/seaction-Companies/Companies";
 import Filter from "./component/filter/Filter";
 import Search from "./component/search/Search";
+import API_CONFIG from "../../core/utils/apiConfig";
+import { contentType, HTTP_METHODS, httpRequest } from "../../core/utils/httpRequest";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data), console.log(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api.escuelajs.co/api/v1/products")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setProducts(data), console.log(data);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
 
+
+  
+  httpRequest(
+    API_CONFIG.endpoints.products.allProducts,
+    HTTP_METHODS.GET,
+    contentType.appJson
+  )
+    .then((res) => {
+      // console.log(res.data.data);
+      setProducts(res.data.data.products);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
  
 
@@ -68,8 +84,6 @@ export default function Home() {
         </Box>
         <Box mb={130} className={classes.containerCards}>
           {products.map((item) => (
-            <>
-              {item.id < 52 ? (
                 <Box key={item.id} className={classes.parentCard}>
                   <Box className={classes.card}>
                     <Image className={classes.imageCard} src={item.images} />
@@ -127,19 +141,14 @@ export default function Home() {
                     </Box>
                   </Box>
                   <Box className={classes.details}>
-                    <Link to={`/products/${item.id}`} className={classes.text}>
-                      {item.title}
+                    <Link to={`/products/${item.productId}`} className={classes.text}>
+                      {item.slug}
                     </Link>
-
                     <Text fz={20} fw={700} c={"red"} className={classes.price}>
-                      {item.price}$
+                      {item.finalPrice}$
                     </Text>
                   </Box>
                 </Box>
-              ) : (
-                <></>
-              )}
-            </>
           ))}
         </Box>
         <Box mb={50} display={"flex"} style={{ justifyContent: "center" }}>

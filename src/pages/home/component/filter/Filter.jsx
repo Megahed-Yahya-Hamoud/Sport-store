@@ -1,17 +1,28 @@
 import { Box, Button } from "@mantine/core";
 import classes from "./Filter.module.css";
+import {
+  contentType,
+  HTTP_METHODS,
+  httpRequest,
+} from "../../../../core/utils/httpRequest";
+import API_CONFIG from "../../../../core/utils/apiConfig";
+import { useState } from "react";
 
 export default function Filter() {
-  // const [cate, setCate] = useState([]);
+  const [category, setCategory] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("https://api.escuelajs.co/api/v1/products")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-        // setCate(data.title);
-  //     })
-  //     .catch((error) => console.error("Error fetching data:", error));
-  // }, []);
+  httpRequest(
+    API_CONFIG.endpoints.categories.allCategories,
+    HTTP_METHODS.GET,
+    contentType.appJson
+  )
+    .then((res) => {
+      // console.log(res.data.data);
+      setCategory(res.data.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   return (
     <Box>
@@ -36,6 +47,9 @@ export default function Filter() {
             <option value={""} selected hidden>
               Select category
             </option>
+            {category.map((ele) => (
+              <option key={ele.id} value={ele.id}>{ele.categoryName}</option>
+            ))}
           </select>
           <input
             type="number"
